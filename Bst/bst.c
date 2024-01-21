@@ -226,3 +226,58 @@ int altura(arvoreBST raiz){
     }
 }
 
+arvoreBST procuraMaiorEsquerda(arvoreBST raiz);
+
+arvoreBST remover(arvoreBST raiz, int valor){
+    if(raiz == NULL){
+    printf("Arvore vazia");
+    return NULL;
+    }
+    if (raiz->valor == valor){
+        //caso 1: elemento não possui filhos
+        if(raiz->dir == NULL && raiz->esq == NULL){
+            free(raiz);
+            return NULL;
+        }
+        //caso 2a: elemento possui exatamente um filho(esq)
+        if(raiz->dir == NULL && raiz->esq != NULL){
+            arvoreBST retorno = raiz->esq;
+            free(raiz);
+            return retorno;
+        }
+        //caso 2b: elemento possui exatamente um filho(dir)
+        if(raiz->esq == NULL && raiz->dir != NULL){
+            arvoreBST retorno = raiz->dir;
+            free(raiz);
+            return retorno;
+        }
+
+        //caso 3: dois filhos if(//) {
+           //localizar o maior elemento da sub arvore esquerda
+        
+
+        if(raiz->esq != NULL && raiz->dir != NULL){
+            arvoreBST temp = raiz->esq;
+            arvoreBST maiorEsqueda = procuraMaiorEsquerda(temp);
+            //copiar o valor desse elemento para a raiz relativa
+            raiz->valor = maiorEsqueda->valor;
+            //remover a duplicata NA SUB-ÁRVORE ESQ
+            raiz->esq = remover(raiz->esq, maiorEsqueda->valor);
+        }
+
+
+        //}
+    }
+    return raiz;
+}
+
+arvoreBST procuraMaiorEsquerda(arvoreBST raiz){
+    arvoreBST no1 = raiz;
+    arvoreBST no2 = raiz->dir;
+
+    while(no2 != NULL){
+        no1 = no2;
+        no2 =no2->dir;
+    }    
+    return no1;
+}

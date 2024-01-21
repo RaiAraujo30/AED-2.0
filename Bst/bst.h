@@ -23,5 +23,6 @@ int pai(arvoreBST raiz, int i);
 arvoreBST podar(arvoreBST raiz, int i);
 int altura(arvoreBST raiz);
 arvoreBST descendentes(int valor,arvoreBST raiz);
+arvoreBST remover(arvoreBST raiz, int valor);
 
 #endif
